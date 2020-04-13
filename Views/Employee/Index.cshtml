@@ -1,0 +1,42 @@
+@model List<Employee>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <a asp-action="New" class="btn btn-outline-success float-right">New Employee</a>
+        </div>
+    </div>
+    <div class="row">
+        @if(Model.Count==0){
+            <p>No employee(s) found!</p>
+        }else{
+            <table class="table">
+                <thead class="bg-dark text-white">
+                    <tr>
+                        <th>Id</th>
+                        <th>FullName</th>
+                        <th>Age</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var e in Model)
+                    {
+                        <tr>
+                            <td>@e.Id</td>
+                            <td>@e.FullName</td>
+                            <td>@e.Age</td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@e.Id" class="btn btn-outline-primary">Edit</a>
+                                <a asp-action="Delete" 
+                                    asp-route-id="@e.Id" 
+                                    class="btn btn-outline-danger"
+                                    onclick="return confirm('Are you sure to remove this record?')">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>
